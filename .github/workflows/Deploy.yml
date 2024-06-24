@@ -18,10 +18,11 @@ jobs:
         with:
           ruby-version: 3.2.1
 
+      - name: Install Bundler
+        run: gem install bundler:2.1.1
+
       - name: Install dependencies
-        run: |
-          gem install bundler:2.1.1
-          bundle install
+        run: bundle install
 
       - name: Build site
         run: bundle exec jekyll build
@@ -31,3 +32,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+
