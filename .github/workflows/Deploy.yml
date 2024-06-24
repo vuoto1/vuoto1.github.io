@@ -1,9 +1,9 @@
-name: Deploy
+name: Build and Deploy Jekyll Site
 
 on:
   push:
     branches:
-      - main  # 또는 사용하는 기본 브랜치
+      - main
 
 jobs:
   build:
@@ -19,7 +19,9 @@ jobs:
           ruby-version: 3.2.1
 
       - name: Install dependencies
-        run: bundle install
+        run: |
+          gem install bundler:2.5.14
+          bundle install
 
       - name: Build site
         run: bundle exec jekyll build
