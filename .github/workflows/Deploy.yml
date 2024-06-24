@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main  # 또는 사용하는 기본 브랜치
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 실행 환경 설정 (여기서는 Ubuntu 사용)
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # 저장소 체크아웃 액션 사용
+
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.x  # 사용하는 Ruby 버전 지정 (Jekyll이 지원하는 버전)
+
+    - name: Install dependencies
+      run: |
+        gem install bundler  # Bundler 설치
+        bundle install       # Gemfile에 명시된 종속성 설치
+
+    - name: Build Jekyll site
+      run: |
+        bundle exec jekyll build  # Jekyll 빌드 명령 실행
